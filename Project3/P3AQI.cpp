@@ -1,35 +1,31 @@
-
-#include<iostream>
-#include<fstream>
-#include <map>
-#include<string>
-#include <utility>
+#include <iostream>
+#include <fstream>
+#include <sstream>
 #include <vector>
 using namespace std;
-int main ()
- {
-    vector<vector<string>> csv;
-    vector<string> data;
-    string name = "";
-    string county = "";
-    int year;
-    int medAQI;
-    string filename("Project3.csv");
-    fstream file(filename,ios::in);
-    std::pair<string,string> pair1;
-    std::pair<int,int> pair2;
-    map<pair<string,string>,pair<int,int>> pollutionMap;
-    if(file.is_open())
-    {
-        while(file >> name >> county >> year >> medAQI)
-        {
-            pair1 = make_pair(name,county);
-            pair2 = make_pair(year,medAQI);
-            pollutionMap.emplace(pair1,pair2);
-        }
 
-    }
-    
-    
-    return 0;
+int main(){
+
+   ifstream dataFile; //read in csv file
+   ofstream dataSet ("data.txt");
+
+   string state;
+   string county; 
+   string year;
+   string mAQI;
+
+   dataFile.open("Project3.csv"); //open file 
+   int i;
+   while (!dataFile.eof()){
+      i++;
+      getline(dataFile, state, ',');
+      getline(dataFile, county, ',');
+      getline(dataFile, year, ',');
+      dataFile >> mAQI;
+      dataSet << state << endl;
+      dataSet << county << endl;
+      dataSet << year << endl;
+      dataSet << mAQI << endl;
+   }
 }
+
