@@ -7,13 +7,6 @@
 #include <vector>
 #include <unordered_map>
 using namespace std;
-struct Node
-{
-    int year;
-    int AQI;
-    string state;
-    string county;
-};
 int main ()
  {
     vector<vector<string>> csv;
