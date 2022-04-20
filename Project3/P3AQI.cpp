@@ -5,7 +5,15 @@
 #include<string>
 #include <utility>
 #include <vector>
+#include <unordered_map>
 using namespace std;
+struct Node
+{
+    int year;
+    int AQI;
+    string state;
+    string county;
+};
 int main ()
  {
     vector<vector<string>> csv;
@@ -19,6 +27,7 @@ int main ()
     std::pair<string,string> pair1;
     std::pair<int,int> pair2;
     map<pair<string,string>,pair<int,int>> pollutionMap;
+    unordered_map<pair<string,string>,pair<int,int>> unorderedPollutionMap;
     if(file.is_open())
     {
         while(file >> name >> county >> year >> medAQI)
@@ -26,6 +35,7 @@ int main ()
             pair1 = make_pair(name,county);
             pair2 = make_pair(year,medAQI);
             pollutionMap.emplace(pair1,pair2);
+            unorderedPollutionMap.emplace(pair1,pair2);
         }
 
     }
