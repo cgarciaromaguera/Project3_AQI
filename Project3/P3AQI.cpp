@@ -13,9 +13,8 @@
 using namespace std;
 using namespace std::chrono;
  
-map<pair<string, string>, vector<string>> pollutionMap;
 unordered_map<pair<string, string>, vector<string>> unorderedPollutionMap;
-
+map<pair<string, string>, vector<string>> pollutionMap;
 string state;
    string county;
    string year;
@@ -25,16 +24,10 @@ string state;
    string maxAQI;
    string percentAQI;
    string medianAQI;  
- /*void timeClock()
- {
-         time_t currTime;
-         currTime = time(NULL);
-         //cout << currTime;
-        std::cout << "This took:" << currTime << endl;
-        return;
-     }*/
 void insertMap()
 {
+    
+
       pollutionMap[{state, county}].push_back(year);
       pollutionMap[{state, county}].push_back(daysAQI);
       pollutionMap[{state, county}].push_back(goodDays);
@@ -45,6 +38,7 @@ void insertMap()
 }
 void insertUnorderedMap()
 {
+    
     unorderedPollutionMap[{state, county}].push_back(year);
     unorderedPollutionMap[{state, county}].push_back(daysAQI);
     unorderedPollutionMap[{state, county}].push_back(goodDays);
@@ -61,10 +55,10 @@ int main()
    ofstream dataMap("dataMap.txt");
    ofstream unorderedMap("dataUnordered.txt");  
    dataFile.open("Project3.csv"); // open file
-   int i;   
+    
    while (!dataFile.eof())
    {
-      i++;
+   
       dataFile.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
       getline(dataFile, state, ',');
       getline(dataFile, county, ',');
@@ -93,15 +87,16 @@ int main()
       // state.resize(state.size() - 1);
    }
  
-   std::cout << "aasdfasdfWelcome to Air Pollution Tracking Index\n----------------------------------\n";
+   std::cout << "Welcome to Air Pollution Tracking Index\n----------------------------------\n";
    std::cout << "This application takes in a state name and subsequently\n";
    std::cout << "Please enter a state: ";
    std::cin >> state;
-   string test = "Alabama";
+   //string test = "Alabama";
    std::cout << "---------\n";
    
-   clock_t start,end;
+   clock_t start,start1,end,end1;
    start = clock();
+   start1 = clock();
    std::cout<< "Did this run" << endl;
    for (auto const &iter : pollutionMap)
    {
@@ -117,13 +112,13 @@ int main()
          std::cout << "Percent Air Quality Index: " << iter.second.at(5) << endl;
          std::cout << "Median Air Quality Index: " << iter.second.at(6) << endl;
       }
-        end = clock();
+        
+   }
+         end = clock();
         double Timer = double(end - start) / double(CLOCKS_PER_SEC);
         cout << "Time taken by program is : " << fixed 
          << Timer;
          cout << " sec " << endl;
-   }
-  
   for (auto const &iter : pollutionMap)
    {
  
@@ -140,6 +135,11 @@ int main()
       }
      
    }
-    
+    end1 = clock();
+        double Timer2 = double(end1 - start1) / double(CLOCKS_PER_SEC);
+        cout << "Time taken by program is : " << fixed
+         << Timer2;
+         cout << " sec " << endl;
+
    return 0;
 }
